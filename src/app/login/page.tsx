@@ -79,7 +79,7 @@ const Login: React.FC = () => {
             />
             <button
               type="submit"
-              className="w-full bg-green-700 text-white py-2 rounded hover:bg-green-800 animated bounceIn delay-2s"
+              className="w-full bg-green-700 text-white py-2 rounded hover:bg-green-800 mb-4 animated bounceIn delay-2s"
             >
               Sign In
             </button>
