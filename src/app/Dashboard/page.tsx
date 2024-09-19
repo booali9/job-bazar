@@ -65,10 +65,10 @@ const Dashboard = () => {
   const [linkedin, setLinkedin] = useState("");
   const [github, setGithub] = useState("");
   const [resumeUrl, setResumeUrl] = useState(null);
-  const [isEditing, setIsEditing] = useState(false); // Default to false
+  const [isEditing, setIsEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("/static/images/default-avatar.jpg");
   const [isUploading, setIsUploading] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false); // Set the drawer to default closed
 
   const fetchUserData = useCallback(async () => {
     try {
@@ -79,7 +79,7 @@ const Dashboard = () => {
       setGithub(github || "");
       setResumeUrl(resume_url || null);
       setAvatarUrl(avatar_url || "/static/images/default-avatar.jpg");
-      setIsEditing(false); // Default to false if data is available
+      setIsEditing(false); 
     } catch (error) {
       console.error("Error fetching profile data:", error);
     }
@@ -100,7 +100,7 @@ const Dashboard = () => {
       const response = await axios.post("/api/save_userdata", data);
       console.log("Profile saved:", response.data);
       setIsEditing(false);
-      fetchUserData(); // Re-fetch data after saving
+      fetchUserData(); 
     } catch (error) {
       console.error("Error saving profile:", error);
     }
@@ -154,30 +154,27 @@ const Dashboard = () => {
         color: "white",
       }}
     >
-  <MuiDrawer
-  variant="permanent"
-  anchor="left"
-  open={open}
-  sx={{
-    ...(open ? openedMixin(theme) : closedMixin(theme)),
-    width: open ? drawerWidth : drawerVisibleWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap",
-    boxSizing: "border-box",
-    "& .MuiDrawer-paper": {
-      width: open ? drawerWidth : drawerVisibleWidth,
-      backgroundColor: "black",
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-  }}
->
-
-
-
+      <MuiDrawer
+        variant="permanent"
+        anchor="left"
+        open={open}
+        sx={{
+          ...(open ? openedMixin(theme) : closedMixin(theme)),
+          width: open ? drawerWidth : drawerVisibleWidth,
+          flexShrink: 0,
+          whiteSpace: "nowrap",
+          boxSizing: "border-box",
+          "& .MuiDrawer-paper": {
+            width: open ? drawerWidth : drawerVisibleWidth,
+            backgroundColor: "black",
+            zIndex: theme.zIndex.drawer + 1,
+            transition: theme.transitions.create("width", {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            }),
+          },
+        }}
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerToggle}>
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -213,7 +210,7 @@ const Dashboard = () => {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
           }),
-          marginTop: `${navbarHeight}px`, // Ensure this matches the height of your navbar
+          marginTop: `${navbarHeight}px`,
         }}
       >
         {/* Profile Section */}
@@ -233,8 +230,8 @@ const Dashboard = () => {
           />
           <Typography variant="h6">{session?.user?.name}</Typography>
         </Box>
-      
-           <UploadImage/>
+
+        <UploadImage />
         <Box component="form" sx={{ mb: 2 }}>
           {isEditing ? (
             <>
