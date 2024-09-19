@@ -79,12 +79,12 @@ const Home = () => {
       {/* User Profile Section */}
       <div className="w-full max-w-screen-lg">
         {users.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-center">
             {users.map((user) => (
               <Link key={user._id} href={`/profile/${user._id}`}>
                 <div
                   className="bg-slate-700 p-4 rounded-lg shadow-lg text-white flex flex-col items-center cursor-pointer"
-                  style={{ width: '180px', height: '300px' }} // Adjust card dimensions
+                  style={{ width: '180px', height: '300px', margin: '0 auto' }} // Center the card on mobile
                 >
                   <Avatar
                     src={user.avatar_url || '/static/images/default-avatar.jpg'}
